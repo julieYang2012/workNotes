@@ -16,6 +16,8 @@ ll -lA
 
 git add  --- add file to commit filed
 
+git add . 将文件夹下所有文件加入到git中
+
 git rm --cached file name, retract the file from commit filed.
 
 
@@ -192,3 +194,97 @@ $ (to the end of line), etc.
 - ctrl-w to jump from one window to another
 
 type a command :e and press ctrl+D to list all the command name starts with :e and press tab to complete the command
+
+
+
+
+
+# 将本地文件夹转换为一个 GIT 项目的一般步骤和untracked content问题
+
+> 将本地文件夹init成git库并且上传到新建的github仓库
+
+### 一、`打开命令行终端，进入项目所在的本地目录，将目录初始化为一个 Git 项目`
+
+```
+$ git init
+复制代码
+```
+
+此时会生成一个隐藏的.git文件，表示创建了一个空的git仓库
+
+![img](https://user-gold-cdn.xitu.io/2019/5/28/16afd18ace39d4a5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+### 二、 `将所有文件放进新的本地 git 仓库`
+
+```
+$ git add .
+复制代码
+```
+
+> 如果你本地已经有 .gitignore 文件，会按照已有规则过滤不需要添加的文件。如果没有，可以根据手动创建.gitignore文件跟git仓库进行关联
+
+### 三、 `将添加的文件提交到仓库`
+
+```
+$ git commit -m "xxx"
+复制代码
+```
+
+### 四、 `登陆你的github账户，创建新的仓库`
+
+![img](https://user-gold-cdn.xitu.io/2019/5/28/16afd2a7fb7d45fb?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+为了避免冲突，先不要勾选 README 和 LICENSE 选项
+
+![img](https://user-gold-cdn.xitu.io/2019/5/28/16afd2bd13bfb015?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+### 六、 `在生成的项目主页上，复制仓库地址`
+
+类似于 [github.com/wozaixuehtm…](https://github.com/wozaixuehtml5/dom-diff.git)
+
+> https跟ssh的都可以
+
+![img](https://user-gold-cdn.xitu.io/2019/5/28/16afd2e7bd6a09ee?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+### 七、 `回到命令行终端界面，将本地仓库关联到远程仓库`
+
+```
+$ git remote add origin https://github.com/wozaixuehtml5/dom-diff.git
+复制代码
+```
+
+可运行以下命令查看结果：
+
+```
+$ git remote -v
+复制代码
+```
+
+### 八、 `提交代码到 GitHub 仓库`
+
+```
+$ git push origin master
+复制代码
+```
+
+### END：解决'modified content, untracked content'的提示报错
+
+到这里基本已经可以了，但是当所选本地文件夹下还有别的文件夹的时候，会出现git仓库跟踪不到这些文件夹的情况，提示报错 'modified content, untracked content'，大体是这样的：
+
+![img](https://user-gold-cdn.xitu.io/2019/5/27/16af88308b966128?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+这里提示的dom-diff就是我的init仓库中的一个文件夹
+
+此时只需要
+
+```
+git rm -rf --cached dom-diff  
+git add dom-diff //重新跟踪dom-diff文件
+复制代码
+```
+
+![img](https://user-gold-cdn.xitu.io/2019/5/28/16afd3aa3cf6a876?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+
+然后就大功告成，可以安安心心的code了！
+
+参考资料：[blog.csdn.net/solo_ws/art…](https://blog.csdn.net/solo_ws/article/details/77095901) [stackoverflow.com/questions/5…](https://stackoverflow.com/questions/50167969/how-to-fix-modified-content-untracked-content-in-git/52722775)
