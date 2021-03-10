@@ -1,0 +1,59 @@
+===================================================================
+A) Xenex
+===================================================================
+1) GIT instead of SVN
+2) Configuration Management
+	-Need to be able to secure and centralize environment configuration.
+		-Experian password change needs to be applied simultaneously across ~20 environments
+	-SignatureMaster and SuretyMaster have a lot of environments that are hard to manage across multiple SVN Branches
+3) Account Security
+	a) Multi Factor / 2FA
+	b) Google Captcha
+	
+4) Architecture
+	a) Horizontally Scalable Database
+	b) Front End: NodeJS vs Thymeleaf vs JSF (HUGE EFFORT)
+	c) Back End: Spring + Rest Services
+	d) ~Database: Spring JPA vs Ibatis. (Ibatis seems better functionality wise, but JPA is more accepted)
+12:04
+===================================================================
+B) SuretyMaster
+===================================================================
+*All the following are dependant on Front End Architecture changes.
+-------------------------------------------------------------------
+5) List CSS Design
+	-Modernize pages like the Inbox
+	
+6) Owner Flow Revamp
+	-All the owner details are mandatory, especially in the Full Bond flow with PFS, and Resume.
+		-i.e. I am registering another owner I may not have their SSN number so I call them to get it. A few pages later I need to call them again to find out if they own realestate.
+		-Additionally cannot proceed in the flow with partial information.
+7) Profile, Address, and Contact Pages
+	-The hierarchy of Branches, Address and Contacts is confusing and does not work well.
+	-These pages probably need a redesign
+	-Organization Address table promotes orphaned data and needs a redesign
+8) Bond Tab Pages Redesign
+	-Single Page: Change the design of the LPM, Offers, etc to be a single page with an information section at the top using Star Model/Progress Bar so it's less confusing to the user about where to go and what to do.
+New
+12:05
+===================================================================
+C) SignatureMaster
+===================================================================
+9) Room CSS
+10) Page CSS
+11) Database Table Design needs to be made conventional.
+	-Different fields are named whatever
+	-Data modification is not being tracked
+	
+12) Code Infrastructure - Missing a lot of quality of life changes
+	a) Debugging
+		i) Tracking where data comes from
+		ii) Logging page state information during crashes
+	b) Page Session management and Backing Bean organization
+	c) Localization requires a lot of manual Developer work, needs to be changed to be invisible to the Developer
+	
+13) Performance
+	a) Queries
+	b) Code
+14) Account Security
+15) Other? i.e. Billing

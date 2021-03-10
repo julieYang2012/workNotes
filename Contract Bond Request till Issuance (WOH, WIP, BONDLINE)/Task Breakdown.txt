@@ -1,0 +1,45 @@
+1. Aggregate Rating : UI / Database / Business Logic
+2. Grouping Bond with the Bondline (Progress Bar)
+3. Offer Summary
+4. Merging Bond issuance flow (Contract Bond Only, BondLine Only, Bond with the BondLine)
+5. Account's BondLine Page
+-------------------------------------------------------------------------
+Credit Card Payment (PayPal or Chase payment gateway)
+WOH
+WIP
+Exceptions
+Report
+Contract Programs (Credit Score Pulling)
+Job/Tasks Scheduling (Need to analyse where all a scheduling is needed. Eg: Reports)
+Broker Market  UI
+Missing Inbox item or correct the existing inbox items
+Post Issuance
+Carrier Pricing Table
+Audit Trail
+Billing
+Consultant (Needs a progress Report, aligned with WIP)
+
+
+
+
+
+--------------
+1. Aggregate Rating : UI / Database / Business Logic
+2. Grouping Bond with the Bondline in the Offer (Progress Bar)
+3. Offer Summary
+4. Merging Bond issuance flow (Contract Bond Only, BondLine Only, Bond with the BondLine)
+of those 4, probably only (4) the bond issuance.
+5) Maintenance / Account's Bond Line Page
+6) Accept Decline quote probably needs the Offer Summary
+7) Client's View of the Bond Line. (1 for Bond Offers)
+8) Sub-Broker's View of the Bond Line. (1 for Bond Offers)
+Sub-Lite has no Fee just commission
+
+2 and 4 should probably be done after everything else
+but it also means I don't care about the issuance page
+somebody could work on it in parallel if they wanted
+1 > 5,7,8 > 3,6 > 4 > 2
+I think 1 can be parallel to 5,7,8
+but 7,8 cause work overlap / merge conflicts
+5 will not cause overlap
+or should not

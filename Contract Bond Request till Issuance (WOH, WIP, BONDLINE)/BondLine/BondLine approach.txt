@@ -1,0 +1,19 @@
+Step 1: Pre setup before Client can request a BondLine
+		1. Carrier Pricing Table (Flat Rate/Sliding Rate/Minimum Bond Cost/Per Bond Type)
+		2. Carrier to Agency Relationship setup (Commission and Limits)
+
+Step 2: During BondLine Approval Page:: Bond Review:: UnderWriter can first review Bond Request Details
+		1. Quick Contractor Questionnaire or Contractor Questionnaire
+		2. Attachments
+		3. Review request package (Reports)
+	
+Step 3: During BondLine Approval Page:: Bond Approval:: Underwriter/Authorized Agents can first review their 
+		1. Company's - Pricing Table and 
+		2. Validate the UnderWriter Authority and their Limits
+		3. Review the declared Type of Work and Work Territory of a client (Part of Bond Request)
+		4. Update Single and aggregate limit (For a WriteUp or Global)
+		5. Update Effective Date and Expiry Date for the BondLine
+		6. Update Offer Expiry Date
+
+		
+Step 4: Send the Offer

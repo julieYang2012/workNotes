@@ -1,0 +1,145 @@
+Eclipse Hot Keys:
+
+Maintenance
+1) Open Resource (Suggestion Box)
+-Open file(s) by suggested name. You can provide wildcard with *.
+Ctrl + Shift + R
+
+2) Open Outline (Suggestion Box)
+-Navigates to the line in the code for the certain variable or method declaration that you are looking for. Very useful for searching for a method.
+Ctrl + O
+
+3) Clean Imports
+Ctrl + Shift + O
+
+4) Comment Method
+-Adds a method comment to all methods if no method is selected
+Ctrl + Alt + J
+
+5) Refactor Name
+-Refactors across all objects that use this variable
+(Cursor in variable) > Alt + Shift + R
+
+6) Generate Variable Methods
+-If you have a lot of variables in a DTO that require Get and Set methods to be created, you can get quicker to the interface with the following:
+(Alt + Shift + S) > Generate Getters and Setters...
+
+
+Tracing, Searching, and Navigating Code
+
+1) Find/Replace
+-In the Options section you want to have the following checked: Incremental, Wrap Search. You want to have unchecked: Case sensitive, Whole Word.
+-If you are able to type without looking at the keyboard you will very quickly find what you are looking for with Incremental searching on.
+Ctrl + F
+
+2) Instance of String
+Next Instance:
+(Highlight String) > (Ctrl + K)
+Previous Instance:
+(Highlight String) > (Ctrl + Shift + K)
+
+3) Global Search
+-The File Search tab is the best tab, the other ones are garbage lol. It will throw an error when you finish searching.
+	> Search > File... > File Search (Tab)
+	Containing text: <variable>
+	File name patterns: *
+
+Drill Down:
+4) Open Implementation
+	i) (Ctrl + Left Click)
+		-This will open the interface if it exists which is probably not what you are looking for.
+	ii) (Ctrl + Hover) > Open Implementation > (Choose the object that implements the code not the interface)
+		-You can open the implementation using this. It still gives you the option to open the interface as a choice though.
+	
+Drill Up:
+5) Call Hierarchy
+	> (Highlight a Method Name) > (Alt + Ctrl + H)
+		-This will give you all objects that call this method, all objects that call the method that call this method, ... (Until it can't go up the hierarchy anymore)
+6) set the show the varies scope
+     	i)Ctrl + Shift + O
+	ii)  windows-> preferences->java->Editor->Mark Occurences
+
+Important Eclipse Views (Windows):
+JAVA EE PERSPECTIVE
+1) Package Explorer
+	-Hides the library breakdown of the jar files for navigation.
+	
+2) Ant
+	-Allows you to drag the build file into an interface controllable with double click instead of navigating the (right click) context menu on the build.xml
+
+3) Console
+	-Shows you messages from the glassfish server and the ant build. Also shows errors when running/debugging java code.
+
+4) Markers
+	-Show any Java errors that are appearing in Eclipse.
+	-IMPORTANT: If an error is in eclipse that doesn't make sense you can DELETE THE ERROR from here.
+
+5) Servers
+	-Allows you a place to start the glassfish server without going to the command line. Glassfish will go down when you close eclipse though.
+	
+6) Synchronize
+	-The most important view you know what this is.
+
+7) History
+	-The second most important window, allowing you to compare revisions.
+	
+DEBUG PERSPECTIVE
+1) Debug (Extremely Important)
+	-This shows you any servers you have up and running and if you have attached a debugger to them.
+	-IMPORTANT: This is effectively the debug stack in eclipse. You can navigate up and down the stack and through different threads. (You can debug multi-threaded code.)
+	
+2) Variables
+	-Shows you all active variables in the current debug state.
+
+3) Expressions
+	-Allows you to watch a specific variable as you debug. (You are looking for a variable that becomes null at some point in time, add it to the expressions view. [Similar to VBA watch])
+
+4) Breakpoints
+	-KEEP THIS CLEAN. It's very important to be aware of which breakpoints you are tracing.
+	-You can setup conditional break points in eclipse, that only trigger if a certain criteria is met. i.e. i == 100 where i is the iterator tracking which iteration of the loop you are in.
+	-Allows you to quickly navigate back to key points in your code. Like having a bookmark.
+
+Debug Hotkeys
+1) Step Over
+F6
+
+2) Step Into
+F5
+
+3) Run
+F8
+
+4) Step Return
+-I never use this
+F7
+
+Debug Shortcuts
+1) Inspect
+-IMPORTANT: Inspect is not showing you the result of the code you run, IT IS RUNNING THE CODE!
+-But that means that you can alter the live state of the page you are debugging by inspecting dirty code that you write that doesn't match what you deployed.
+-i.e. I have a String name = "Chris"; During debug I can write a line to say 'name = "Mayur"' and inspect that and it will change the name variable to Mayur without redeploying.
+-This is very useful if you just want to check that a change will allow the code to proceed without deploying.
+
+-Additionally the inspect functionality will allow you to run through the sub-routine code as if it were running WITHOUT CRASHING THE CODE. (As long as it's not volatile.)
+-This means that if you know there is a null pointer that you are looking for coming soon, you can inspect the method and have it run and crash and be back where you started so you can drill down further, without having to reset the page state.
+*You are not able to double inspect. You can't inpsect inside of code that is being inspected.
+
+*For computationally heavy code such as BCrypt's exponentially calculated encrypted string that it returns, it will put a huge load on the debugger. If you set the breakpoint after that code it will be able to bypass it without much time.
+-For example I have it set to 2^14 passes taking around 1 second in CPU time but takes around 14 seconds when debugging.
+
+(Highlight the single line code you want to run) > (Right Click) > Inspect
+OR
+(Highlight the single line code you want to run) > (Ctrl + Shift + I)
+
+2) Stop Local Debug As
+-If you are using main or a JUnit, Debug as Java Application, you can kill the process with the following command
+Ctrl + F2
+
+3) Start Local Debug As
+*UNTESTED
+Alt + Shift + D, J
+
+-I usually just click the drop down list beside the bug icon or the bug icon itself.
+
+
+

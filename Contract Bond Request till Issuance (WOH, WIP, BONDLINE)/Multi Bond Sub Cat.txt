@@ -1,0 +1,18 @@
+Designs for Multiple Bond Sub Categories.
+1) Collapsible panels
+https://www.w3schools.com/bootstrap/bootstrap_collapse.asp
+*Also see small POC "Collapsible.rar"
+
+2) Accordian panels
+https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_collapsible_accordion&stacked=h
+
+3) Top tabs
+
+4) Side Tabs
+
+5) Grid layout (Research EBT or Rishi's Mockups)
+EDeveloperSurety.png
+
+6) Progress Bar
+
+7) Layered Sub Tabs (like windows - could give a different look than tabs)

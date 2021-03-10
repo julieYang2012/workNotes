@@ -1,0 +1,81 @@
+<!-- Home page for passing parameters -->
+ 
+<template>
+    <router-link :to="{path: '/about'}">
+        <button>open About us</button>
+    </router-link>
+ 
+    <button @click="open1">open About us - query</button>
+    
+    <button @click="open2">open About us - params</button>
+</template>
+ 
+<script>
+export default {
+    name: "Home",
+    data() {
+        return {};
+    },
+    methods: {
+        // query
+        open1() {  
+            this.$router.push({
+                path: '/about',
+                query: {
+                  id: 2048,
+                  userId: 123,
+                  job: "Web"
+                }
+            });
+        },
+ 
+        //if there are many parameters need to pass，use params method，becuase query method passing parameters by URL(URL have the limits for numembers of parameters) 
+        // params
+        open2() {
+            this.$router.push({
+                name: "About", // Only use "name" and upcase for the first alphabet
+                params: {
+                 id: 2048,
+                  userId: 123,
+                  job: "Web"
+                }
+            });
+        }
+    },
+}
+</script>
+
+
+<!-- About us page for receiving parameters -->
+
+<template>
+      <section>About us</section>
+</template>
+ 
+ 
+<script>
+export default {
+    name: "About",
+    data() {
+        return {};
+    },
+    created() {
+        // in the created method get the parameters
+ 
+       
+ 
+        // query method：【similar to ajax get method】
+        console.log(this.$route.query.id);      // 2048
+        console.log(this.$route.query.userId);    // 2048
+        console.log(this.$route.query.job);     // Web
+ 
+        // params method：【similar to ajax post method 】
+        console.log(this.$route.params.id);      // 2048
+        console.log(this.$route.params.userId);    // 2048
+        console.log(this.$route.params.job);     // Web
+ 
+        // this.$route 
+        console.log(this.$route);  //this.$route 
+ 
+</script>
+ 

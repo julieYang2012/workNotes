@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html> 
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <title>The Regex Coach - Tutorial step 18</title>
+  <style type="text/css">
+  pre { padding:5px; background-color:#e0e0e0 }
+  a.none { text-decoration: none; color:black }
+  a { text-decoration: none; }
+  a:visited { text-decoration: none; }
+  a:active { text-decoration: underline; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+
+<body bgcolor=white>
+
+<h2><a href="index.html">The Regex Coach</a> - Tutorial step 18</h2>
+
+Switch to the &quot;Step&quot; <a href="index.html#shot">tab</a>, type
+the regular expression <code>(?:[a]*b|a+ac)y</code> into the regex
+pane, and type the string <code>xaacy</code> into the target
+pane. Click the &quot;Start&quot; button.
+<p>
+<img src="shot18.png" width=506 height=545 border=0 alt="Screen Shot">
+<p>
+By pressing the &quot;Next&quot; button repeatedly you can now see a
+step-by-step visual tour of how the regex engine tries to match the
+target string.
+<p>
+While you do this the red background in the upper step pane (the
+<em>step regex pane</em>) highlights which subexpression the engine is
+currently trying to match. The message area below the step regex pane
+(the <em>step regex message area</em>) shows the result of this
+attempt. If there's a (sub-)match the corresponding part of the
+target string in the lower pane (the <em>step target pane</em>) is
+also highlighted in red.
+<p>
+The part of the target string before this match is either yellow
+(which means that this part has already matched) or grey (which means
+that this part isn't taken into consideration).
+<p>
+The following table shows what will happen in this particular example.
+<p>
+<table border=1 cellspacing=4 cellpadding=4>
+<tr><th></th><th>step regex pane</th><th>step regex message</th><th>step target pane</th></tr>
+
+<tr><td rowspan=2 align=right valign=top>1.</td><td><code>(?:<font style="background: red">[a]</font>*b|a+ac)y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>The initial state after the &quot;Start&quot; button has been pressed. The engine tries to match <code>[a]</code> against <code>x</code> (position&nbsp;0) but doesn't succeed.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>2.</td><td><code>(?:<font style="background: red">[a]*</font>b|a+ac)y</code></td><td>Sub-match from 0 to 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>Which means that <code>[a]*</code> <em>did</em> succeed - zero repetitions, i.e. a zero-length match from&nbsp;0 to&nbsp;0.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>3.</td><td><code>(?:[a]*<font style="background: red">b</font>|a+ac)y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>Now we must match the <code>b</code> (still at the same position). Nope, doesn't work...</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>4.</td><td><code>(?:<font style="background: red">[a]*b</font>|a+ac)y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>Which in turn means that the whole subexpression <code>[a]*b</code> didn't succeed.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>5.</td><td><code>(?:[a]*b|<font style="background: red">a</font>+ac)y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>So the engine tries the other half of the alternation - let's start with one <code>a</code>. Again, no match.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>6.</td><td><code>(?:[a]*b|<font style="background: red">a+</font>ac)y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>Which implies that <code>a+</code> can't match.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>7.</td><td><code>(?:[a]*b|<font style="background: red">a+ac</font>)y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>Which in turn implies that <code>a+ac</code> can't match.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>8.</td><td><code><font style="background: red">(?:[a]*b|a+ac)</font>y</code></td><td>No sub-match at 0</td><td><code>xaacy</code></td></tr>
+<tr><td colspan=3>So, finally, the whole alternation is doomed to fail at position&nbsp;0.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>9.</td><td><code>(?:<font style="background: red">[a]</font>*b|a+ac)y</code></td><td>Sub-match from 1 to 2</td><td><code><font style="background: #555555">x</font><font style="background: red">a</font>acy</code></td></tr>
+<tr><td colspan=3>We start anew at position&nbsp;1. The <code>x</code> at position&nbsp;0 now has a grey background because we don't look at it anymore. Again, we start with <code>[a]</code> and this time we suceed. The sub-match is shown with a red background in the step target pane.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>10.</td><td><code>(?:<font style="background: red">[a]</font>*b|a+ac)y</code></td><td>Sub-match from 2 to 3</td><td><code><font style="background: #555555">x</font><font style="background: yellow">a</font><font style="background: red">a</font>cy</code></td></tr>
+<tr><td colspan=3><code>[a]</code> matches again at position&nbsp;2. The match we have so far is marked with a yellow background.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>11.</td><td><code>(?:<font style="background: red">[a]*</font>b|a+ac)y</code></td><td>Sub-match from 1 to 3</td><td><code><font style="background: #555555">x</font><font style="background: red">aa</font>cy</code></td></tr>
+<tr><td colspan=3>So, <code>[a]*</code> can match the sequence <code>aa</code>.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>12.</td><td><code>(?:[a]*<font style="background: red">b</font>|a+ac)y</code></td><td>No sub-match at 3</td><td><code><font style="background: #555555">x</font><font style="background: yellow">aa</font>cy</code></td></tr>
+<tr><td colspan=3>But we can't match <code>b</code> from here.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>13.</td><td><code>(?:<font style="background: red">[a]*</font>b|a+ac)y</code></td><td>Sub-match from 1 to 2</td><td><code><font style="background: #555555">x</font><font style="background: red">a</font>acy</code></td></tr>
+<tr><td colspan=3>Let's see if it helps to make the <code>[a]*</code> match shorter. (This is the technique known as <em>backtracking</em>.)</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>14.</td><td><code>(?:[a]*<font style="background: red">b</font>|a+ac)y</code></td><td>No sub-match at 2</td><td><code><font style="background: #555555">x</font><font style="background: yellow">a</font>acy</code></td></tr>
+<tr><td colspan=3>Hmm, no...</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>15.</td><td><code>(?:<font style="background: red">[a]*</font>b|a+ac)y</code></td><td>Sub-match from 1 to 1</td><td><code><font style="background: #555555">x</font>aacy</code></td></tr>
+<tr><td colspan=3>Still shorter: a zero-length match for <code>[a]*</code>.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>16.</td><td><code>(?:[a]*<font style="background: red">b</font>|a+ac)y</code></td><td>No sub-match at 1</td><td><code><font style="background: #555555">x</font>aacy</code></td></tr>
+<tr><td colspan=3>No, didn't help either.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>17.</td><td><code>(?:<font style="background: red">[a]*b</font>|a+ac)y</code></td><td>No sub-match at 1</td><td><code><font style="background: #555555">x</font>aacy</code></td></tr>
+<tr><td colspan=3>So, the whole left side of the alternation didn't match.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>18.</td><td><code>(?:[a]*b|<font style="background: red">a</font>+ac)y</code></td><td>Sub-match from 1 to 2</td><td><code><font style="background: #555555">x</font><font style="background: red">a</font>acy</code></td></tr>
+<tr><td colspan=3>Let's try the right side. The first <code>a</code> matches.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>19.</td><td><code>(?:[a]*b|<font style="background: red">a</font>+ac)y</code></td><td>Sub-match from 2 to 3</td><td><code><font style="background: #555555">x</font><font style="background: yellow">a</font><font style="background: red">a</font>cy</code></td></tr>
+<tr><td colspan=3>And it matches again.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>20.</td><td><code>(?:[a]*b|<font style="background: red">a+</font>ac)y</code></td><td>Sub-match from 1 to 3</td><td><code><font style="background: #555555">x</font><font style="background: red">aa</font>cy</code></td></tr>
+<tr><td colspan=3>So that the repetition <code>a+</code> can match the substring <code>aa</code>.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>21.</td><td><code>(?:[a]*b|a+<font style="background: red">ac</font>)y</code></td><td>No sub-match at 3</td><td><code><font style="background: #555555">x</font><font style="background: yellow">aa</font>cy</code></td></tr>
+<tr><td colspan=3>But that has eaten up all <code>a</code>s, so the string <code>ac</code> behind the repetition can't match.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>22.</td><td><code>(?:[a]*b|<font style="background: red">a+</font>ac)y</code></td><td>Sub-match from 1 to 2</td><td><code><font style="background: #555555">x</font><font style="background: red">a</font>acy</code></td></tr>
+<tr><td colspan=3>Let's make the repetition shorter - backtracking again.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>23.</td><td><code>(?:[a]*b|a+<font style="background: red">ac</font>)y</code></td><td>Sub-match from 2 to 4</td><td><code><font style="background: #555555">x</font><font style="background: yellow">a</font><font style="background: red">ac</font>y</code></td></tr>
+<tr><td colspan=3>This time it works!</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>24.</td><td><code>(?:[a]*b|<font style="background: red">a+ac</font>)y</code></td><td>Sub-match from 1 to 4</td><td><code><font style="background: #555555">x</font><font style="background: red">aac</font>y</code></td></tr>
+<tr><td colspan=3>Which means that the whole right side of the alternation matched.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>25.</td><td><code><font style="background: red">(?:[a]*b|a+ac)</font>y</code></td><td>Sub-match from 1 to 4</td><td><code><font style="background: #555555">x</font><font style="background: red">aac</font>y</code></td></tr>
+<tr><td colspan=3>Which of course means that the whole alternation matched.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>26.</td><td><code>(?:[a]*b|a+ac)<font style="background: red">y</font></code></td><td>Sub-match from 4 to 5</td><td><code><font style="background: #555555">x</font><font style="background: yellow">aac</font><font style="background: red">y</font></code></td></tr>
+<tr><td colspan=3>Now only the <code>y</code> at the end remains - and succeeds.</td></tr>
+
+<tr><td rowspan=2 align=right valign=top>27.</td><td><code>(?:[a]*b|a+ac)y</code></td><td>Match from 1 to 5</td><td><code>x<font style="background: yellow">aacy</font></code></td></tr>
+<tr><td colspan=3>That's it - we're through.</td></tr>
+
+</table>
+<p>
+Note that the &quot;Next&quot; button is disabled after the last step. The step panes now look exactly like their &quot;big brothers&quot; above them.
+<p>
+In case you're wondering what the &quot;verbose&quot; checkbox is for: Uncheck it and the stepper won't report more than one failure in a row, i.e.
+steps&nbsp;4 to&nbsp;8 and&nbsp;17 above wouldn't have happened.
+<p>
+<a href="index.html">THE END</a>
+
+</body>
+</html>
