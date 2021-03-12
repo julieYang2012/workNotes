@@ -2,6 +2,25 @@
 
 ### 基本命令
 
+````
+mkdir wap // 项目在本地的路径
+cd wap
+git init 
+touch README.md 
+git add README.md 
+git commit -m "first commit" 
+git remote add origin https://git.oschina.net/name/package.git  // 远程仓库地址
+
+
+已有项目：
+ 
+cd existing_git_repo
+git remote add origin https://git.oschina.net/name/package.git
+git push -u origin master
+````
+
+
+
 git init 
 
 ll 列出文件
@@ -131,7 +150,13 @@ public class Aaa extends BaseDTO {
 
 
 
-
+\##Build Folder in SuretyMaster
+WARNING: Git requires there to be at least one file for a folder to be TRACKED.
+1) Create a dummy file in the build folder for it to be committed. THIS FILE IS EMPTY
+build/.gitignore2) Need to modify .gitignore to ignore all the contents of the build folder
+/build/*3) FORCE ADD the file in the folder so the folder is added
+git add -f build/.gitignore
+git add .gitignore(I did the rest of the commit and push in eclipse.)
 
 
 
@@ -288,3 +313,212 @@ git add dom-diff //重新跟踪dom-diff文件
 然后就大功告成，可以安安心心的code了！
 
 参考资料：[blog.csdn.net/solo_ws/art…](https://blog.csdn.net/solo_ws/article/details/77095901) [stackoverflow.com/questions/5…](https://stackoverflow.com/questions/50167969/how-to-fix-modified-content-untracked-content-in-git/52722775)
+
+
+
+
+
+
+
+````
+git-graph.view: Git Graph: View Git Graph
+git-graph.addGitRepository: Git Graph: Add Git Repository... (used to add sub-repos to Git Graph)
+git-graph.clearAvatarCache: Git Graph: Clear Avatar Cache
+git-graph.endAllWorkspaceCodeReviews: Git Graph: End All Code Reviews in Workspace
+git-graph.endSpecificWorkspaceCodeReview: Git Graph: End a specific Code Review in Workspace... (used to end a specific Code Review without having to first open it in the Git Graph View)
+git-graph.fetch: Git Graph: Fetch from Remote(s) (used to open the Git Graph View and immediately run "Fetch from Remote(s)")
+git-graph.removeGitRepository: Git Graph: Remove Git Repository... (used to remove repositories from Git Graph)
+git-graph.resumeWorkspaceCodeReview: Git Graph: Resume a specific Code Review in Workspace... (used to open the Git Graph View to a Code Review that is already in progress)
+git-graph.version: Git Graph: Get Version Information
+````
+
+
+
+
+
+# Git实用教程（九）| 使用VS Code进行Git可视化操作
+
+https://cloud.tencent.com/developer/article/1662720
+
+2020-07-15阅读 2K0
+
+**Git实用教程专栏回顾**
+
+- Git实用教程（一） | 为什么需要版本控制？（以嵌入式项目开发为例）
+- Git实用教程（二） | Git简介及安装详解
+- Git实用教程（三） | Git本地库操作（仓库初始化、提交修改）
+- Git实用教程（四） | Git本地库操作（查看提交历史、版本前进回退）
+- Git实用教程（五） | Git本地库操作（分支管理）
+- Git实用教程（六）| Github远程库操作（创建、拉取、推送、克隆）
+- Git实用教程（七）| Github远程库操作（邀请远程库协作者）
+- Git实用教程（八）| Github远程库操作（使用PR贡献代码）
+
+### **0. 使用VS Code进行Git可视化操作** 
+
+VS Code内置了对Git的支持，可以使用图形化界面方便的进行版本控制，比如暂存，提交更新，推送，拉取这些常规操作，特别在比较文件差异方面有着得天独厚的优势，但是前提是：
+
+- **已经安装了VScode并且了解其使用**
+- **电脑上必须安装了Git并且你了解Git的常用命令行操作**
+
+
+
+### **1.设置git.path** 
+
+Git的安装可以参考我的第二篇文章（Git实用教程（二） | Git简介及安装详解），在安装过程中有一步如下：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/9sre1cb8j6.png?imageView2/2/w/1620)
+
+大多数人经常使用的是Git自带的命令行工具Git bash，为了不影响其它windows命令，**安装时会选择第一个**，那么，VS Code启动后是找不到Git所在位置的，必须要自己设置`git.path`，否则打开**Git存储库**(如果是普通文件夹，请先使用`git init`初始化为Git仓库)会出现如下提示：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/ktn9zzdjia.png?imageView2/2/w/1620)
+
+切换到源代码管理视图，也可以看到错误提示：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/o42rc872g1.png?imageView2/2/w/1620)
+
+解决方法如下：
+
+1. 使用`Ctrl+Shift+P`打开命令面板，输入`setting`，选择`首选项：打开设置(json)`：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/oome3iz7sv.png?imageView2/2/w/1620)
+
+1. 添加`git.path`一项，目录为当前电脑上`git.exe`所在目录，如图：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/lcatbfli2v.png?imageView2/2/w/1620)
+
+1. 保存，重新用VS Code打开Git存储库：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/leyfbmi23u.png?imageView2/2/w/1620)
+
+### **2.本地库基本操作** 
+
+## **2.1.修改文件**
+
+对本地库进行修改，创建一个新的`test.c`文件，并添加一段代码，可以看到**VS Code会自动显示出更改**：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/59hom62a30.png?imageView2/2/w/1620)
+
+## **2.2.暂存修改**
+
+在命令行中将当前修改暂存使用命令`git add <文件名>`，但在VS Code中，可以以图形化方式操作，并且可以清楚到当前暂存区和修改区的内容：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/5b7b17jih3.png?imageView2/2/w/1620)
+
+## **2.3.提交更新到本地库**
+
+同样，在命令行中将暂存区内容提交到本地库使用命令`git commit -m  <提交信息>`，在VS Code中，可以以图形化方式操作：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/ambzygomlm.png?imageView2/2/w/1620)
+
+点击提交按钮之后，会弹出输入提交信息的对话框，输入提交信息即可：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/4cow6osquk.png?imageView2/2/w/1620)
+
+修改区和暂存区内容清空，如图：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/e3pz1zy3xi.png?imageView2/2/w/1620)
+
+### **3.安装Git扩展添加更多功能** 
+
+VS Code内部集成的Git仅仅支持一些基本操作，我们可以安装Git扩展来支持更多功能，比如`git-extension-pack`这个扩展：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/s7n74s440w.png?imageView2/2/w/1620)
+
+在VS Code扩展搜索`git`，选择该扩展，安装：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/7061k8hj1p.png?imageView2/2/w/1620)
+
+## **3.1.查看提交历史**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/zx5nm11nbo.png?imageView2/2/w/1620)
+
+## **3.2.随时查看当前内容的状态**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/4qnvt4mij1.png?imageView2/2/w/1620)
+
+## **3.3.随时查看仓库状态**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/qolavld15q.png?imageView2/2/w/1620)
+
+## **3.4.查看文件差异**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/b8ezdlt9az.png?imageView2/2/w/1620)
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/z1muwmvzqv.jpeg?imageView2/2/w/1620)
+
+## **3.5. 切换当前分支**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/911haw0jyo.jpeg?imageView2/2/w/1620)
+
+## **3.6. 查看分支之间的差异和合并分支**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/sxv83pbg7a.jpeg?imageView2/2/w/1620)
+
+可以看到结果如下：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/nzser9rlrh.jpeg?imageView2/2/w/1620)
+
+查看文件差异之后将分支合并到master，打开命令行输入`git merge`：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/t116div360.png?imageView2/2/w/1620)
+
+选择要合并到当前分支的分支：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/y2bcaq1akd.png?imageView2/2/w/1620)
+
+如果可以自动合并失败，则会出现以下界面：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/r607ue84c6.jpeg?imageView2/2/w/1620)
+
+直接在编辑器中手动修改冲突，修改之后保存即可：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/9xxzh8vxuc.png?imageView2/2/w/1620)
+
+### **4.远程库操作** 
+
+注：如果本地的存储库是克隆下来的，或者已经手动添加了远程库地址，则可以直接进行推送和拉取操作。
+
+## **4.1.在Github上新建一个远程库**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/tubojm462m.png?imageView2/2/w/1620)
+
+## **4.2.添加远程库**
+
+使用`Ctrl+Shift+P`打开命令面板，输入`git add`，选择`添加远程库`：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/4m5mffk3ae.png?imageView2/2/w/1620)
+
+填写**远程库地址的别名**：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/swk6465fn1.png?imageView2/2/w/1620)
+
+填写远程库地址：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/kh1tdtr9d3.png?imageView2/2/w/1620)
+
+## **4.3.推送内容到远程库**
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/wjcy2ajo40.png?imageView2/2/w/1620)
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/14qjh59i5f.png?imageView2/2/w/1620)
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/zlxq28qqay.png?imageView2/2/w/1620)
+
+### **5.更多Git操作** 
+
+至此，使用VS Code配合Git进行一些本地库和远程库基本操作就讲述完了，些许有些意犹未尽，其实，**VS Code内置的Git扩展还有很多命令可以执行**，比如：初始化本地库，克隆远程库，拉取远程库内容等等，使用`Ctrl+Shift+P`打开命令面板，输入`git`即可看到所有，有兴趣的小伙伴可以自己尝试一下：
+
+![img](https://ask.qcloudimg.com/http-save/yehe-1088047/6bkvgy0kd2.png?imageView2/2/w/1620)
+
+本文分享自微信公众号 - Mculover666（Mculover666），作者：mculover666
+
+原文出处及转载信息见文内详细说明，如有侵权，请联系 yunjia_community@tencent.com 删除。
+
+原始发表时间：2019-10-26
+
+本文参与[腾讯云自媒体分享计划](https://cloud.tencent.com/developer/support-plan)，欢迎正在阅读的你也加入，一起分享。
+
+[举报](javascript:;)
+
+点赞 2
+
